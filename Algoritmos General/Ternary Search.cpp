@@ -1,40 +1,65 @@
 #include <bits/stdc++.h>
-#include <sstream>
-#define int ll
-#define mp make_pair
-#define pb push_back
-#define all(a) (a).begin(), (a).end()
-#define floatigual(a, b) (fabs(a - b) < EPS)
-#define mod(a) ((a) % MOD1)
-#define FOR(i, n) for (int i = 0; i < (n); ++i)
-#define FOR3(i, a, b) for (int i = (a); i < (b); ++i)
-#define FORD(i, n) for (int i = (n) - 1; i >= 0; --i)
-#define FORDD(i, a, b) for (int i = (b) - 1; i >= (a); --i)
- 
 using namespace std;
- 
-typedef long long ll;
-typedef long double ld;
-typedef unsigned long long ull;
-typedef pair<int, int> pii;
-typedef vector<int> vi;
-typedef vector<ll> vlolo;
- 
-const int tam = 200010;
-const int MOD = 1000000007;
-const double DINF = 1e100;
-const double EPS = 1e-9;
-const double PI = acos(-1);
- 
+/*
+ *   *
+ *
+ *
+ * */
 
-void solve(){
-     cout<<"Implementacion del ternary search";
-     
+//   ar vector que contiene a la funcion
+
+void ternarySearchMaximo() {
+    int l = 0;
+    r = n - 1, m1, m2;
+    while (r - l > 2) {
+        m1 = l + (r - l) / 3;
+        m2 = r - (r - l) / 3;
+
+        int fm1 = ar[m1]; // resultado funcion evaluada en m1
+        int fm2 = ar[m2];
+
+        if (fm1 == fm2) {
+            l = m1;
+            r = m2;
+
+        } else if (fm1 < fm2) {
+            l = m1;
+        } else {
+            r = m2;
+        }
+    }
+    int ans = INT_MIN;
+    for (int i = l; i <= r; i++) {
+        if (ar[i] > ans) {
+            ans = ar[i];
+        }
+    }
 }
-signed main(){
-    ios::sync_with_stdio(0); 
-    cin.tie(0); 
-    cout.tie(0);
-    solve();
-    return 0;
+void ternarySearchMin() {
+    int l = 0;
+    r = n - 1, m1, m2;
+    while (r - l > 2) {
+        m1 = l + (r - l) / 3;
+        m2 = r - (r - l) / 3;
+
+        int fm1 = ar[m1]; // resultado funcion evaluada en m1
+        int fm2 = ar[m2];
+
+        if (fm1 == fm2) {
+            l = m1;
+            r = m2;
+
+        } else if (fm1 < fm2) {
+            l = m1;
+        } else {
+            r = m2;
+        }
+    }
+    int ans = INT_MAX;
+    for (int i = l; i <= r; i++) {
+        if (ar[i] < ans) {
+            ans = ar[i];
+        }
+    }
 }
+
