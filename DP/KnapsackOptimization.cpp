@@ -1,24 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
  
-//dp[i][j] = max(dp[i-1][j], dp[i-1][j-value])
+ //Knapsack Optimization memory O(2*W)
 void solve(){
      int n,x; cin>>n>>x;
      vector<int> v(n);
      vector<int> w(n);
      for(int i = 0; i < n; i++)cin>>w[i];
      for(int i = 0; i < n; i++)cin>>v[i];
-     vector<vector<int>> dp(n+1, vector<int> (x+1, 0));
+     vector<int> ant(x+1, 0);
      for(int i = 1; i <= n; i++){
+        vector<int> act(x+1, 0);
          for(int j = 0; j <= x; j++){
              int w1 = w[i-1];
              int v1 = v[i-1];
-             int t = (j >= w1? dp[i-1][j-w1]+v1:0);
-             int nt = dp[i-1][j];
-             dp[i][j] = max(t, nt);
+             int t = (j >= w1? ant[j-w1]+v1:0); //dp[i-1][j-value]
+             int nt = ant[j]; //dp[i-1][j]
+             act[j]= max(t, nt);
          }
+         ant = act;
      }
-     cout<<dp[n][x]<<endl;
+     cout<<ant[x]<<endl;
 }
  
 signed main() {
